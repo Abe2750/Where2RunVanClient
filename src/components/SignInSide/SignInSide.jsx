@@ -5,13 +5,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import {MuiLink} from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 
@@ -98,22 +99,21 @@ const defaultTheme1 = createTheme();
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <MuiLink component={RouterLink} href="#" variant="body2">
                     Forgot password?
-                  </Link>
+                  </MuiLink>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <MuiLink component={RouterLink} to="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
-                  </Link>
+                  </MuiLink>
                 </Grid>
-              </Grid>
-             
+                </Grid>
             </Box>
-          </Box>
+            </Box>
         </Grid>
-      </Grid>
-    </ThemeProvider>
-  );
+        </Grid>
+        </ThemeProvider>
+    );
 };
 export default SignInSide;
