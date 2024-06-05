@@ -1,13 +1,18 @@
 
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route,Routes } from 'react-router-dom';
 import SignInSide from  "./components/SignInSide/SignInSide" 
+import SignUp from "./components/SignUpPage/SignUpPage"
 
 function App() {
   return (
     <div className="App">
      <BrowserRouter>
-      <SignInSide />
+     <Routes>
+        <Route path="/signin" element={<SignInSide/>} />
+        <Route path="/signup" element={<SignUp/>} />
+     </Routes>
+      
       </BrowserRouter>
     </div>
   );
