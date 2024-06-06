@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { MuiLink}  from '@mui/material/Link';
+import MuiLink  from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -109,7 +109,7 @@ function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <MuiLink href="#" variant="body2">
+                <MuiLink component={RouterLink} to="/signin" variant="body2">
                   Already have an account? Sign in
                 </MuiLink>
               </Grid>
