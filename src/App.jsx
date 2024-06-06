@@ -5,6 +5,7 @@ import SignInSide from  "./components/SignInSide/SignInSide"
 import SignUp from "./components/SignUpPage/SignUpPage"
 import Hero from './components/Hero/Hero';
 
+
 function App() {
   return (
     <div className="App">
