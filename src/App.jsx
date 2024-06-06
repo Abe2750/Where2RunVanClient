@@ -9,7 +9,7 @@ import Hero from './components/Hero/Hero';
 function App() {
   return (
     <div className="App">
-    <Hero/>
+     <Hero/>
      <BrowserRouter>
      <Routes>
         <Route path="/signin" element={<SignInSide/>} />
