@@ -6,6 +6,7 @@ import SignUp from "./components/SignUpPage/SignUpPage"
 import Hero from './components/Hero/Hero';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import RunRoutes from './components/RunRoutes/RunRoutes';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Header/>
      <Hero/>
      <BrowserRouter>
+     <RunRoutes/>
      <Routes>
         <Route path="/signin" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUp/>} />

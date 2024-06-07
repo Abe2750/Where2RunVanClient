@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import MapComponent from '../MapComponent/MapComponent';
+
 
 
 export default function Hero() {
@@ -87,7 +87,6 @@ export default function Hero() {
             </Button>
           </Stack>
         </Stack>
-        <MapComponent />
       </Container>
     </Box>
   );
