@@ -6,10 +6,37 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 
 
 
 export default function Hero() {
+    
+
+    async function getPopularSegments(lat, lng) {
+        const token = '3a5a494dfe741282650ca5562d4e7db8489133c7';
+        const response = await axios.get(`https://www.strava.com/api/v3/segments/explore`, {
+            params: {
+                bounds: `${lat-0.1},${lng-0.1},${lat+0.1},${lng+0.1}`,
+                activity_type: 'running',
+                access_token: token
+            }
+        });
+        return response.data;
+    }
+    const handleClick = async () => {
+        const lat = 40.7128; // Placeholder latitude
+        const lng = -74.0060; // Placeholder longitude
+        try {
+            const segments = await getPopularSegments(lat, lng);
+            console.log(segments); // Do something with the segments data
+        } catch (error) {
+            console.error('Failed to fetch popular segments:', error);
+        }
+    };
+
+
+
   return (
     <Box
       id="hero"
@@ -82,7 +109,7 @@ export default function Hero() {
                 'aria-label': 'Enter your email address',
               }}
             />
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleClick}>
               Start now
             </Button>
           </Stack>
