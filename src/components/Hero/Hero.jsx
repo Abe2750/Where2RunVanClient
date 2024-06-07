@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import AddressInput from '../AddressInput/AddressInput';
 
 
 
@@ -90,29 +91,20 @@ export default function Hero() {
           >
            Tired of running the same route? Where2RunVan helps you discover new running routes in Vancouver while exlporing the city.
           </Typography>
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            alignSelf="center"
-            spacing={1}
-            useFlexGap
-            sx={{ pt: 2, width: { xs: '100%', sm: 'auto' } }}
-          >
-            <TextField
-              id="outlined-basic"
-              hiddenLabel
-              size="small"
-              variant="outlined"
-              aria-label="Enter your email address"
-              placeholder="Your email address"
-              inputProps={{
-                autoComplete: 'off',
-                'aria-label': 'Enter your email address',
-              }}
-            />
-            <Button variant="contained" color="primary" onClick={handleClick}>
-              Start now
-            </Button>
-          </Stack>
+          
+            <AddressInput/>
+            <Box>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    onClick={handleClick}
+                >
+                    Find Routes
+                </Button>
+            </Box>
+            
+          
         </Stack>
       </Container>
     </Box>

@@ -3,6 +3,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { styled } from '@mui/system';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import AddressInput from '../AddressInput/AddressInput';
 
 
 
@@ -18,6 +19,7 @@ const MapComponent = () => {
     
     const [apiKey,setApiKey] = useState('');
     const [isMapLoaded, setIsMapLoaded] = useState(false);
+    const [stravaAPIKey, setStravaAPIKey] = useState('');
 
 
 
@@ -26,6 +28,7 @@ const MapComponent = () => {
         .then((res) => {
             setApiKey(res.data.apiKey);
             setDefaultCenter(res.data.location);
+            setStravaAPIKey(res.data.stravaApiKey);
             console.log(res.data);
         })
         .catch((err) => {
