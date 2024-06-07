@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import RunningIcon from '../../assets/Icons/running.svg';
-import ToggleColorMode from '../ToggleColorMode/ToggleColorMode';
+
 
 
 
@@ -25,7 +25,7 @@ const logoStyle = {
   padding: '0px 10px',
 };
 
-function Header({ mode, toggleColorMode }) {
+function Header() {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -123,7 +123,7 @@ function Header({ mode, toggleColorMode }) {
                 alignItems: 'center',
               }}
             >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+             
               <Button
                 color="primary"
                 variant="text"
@@ -170,7 +170,7 @@ function Header({ mode, toggleColorMode }) {
                       flexGrow: 1,
                     }}
                   >
-                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                  
                   </Box>
                   <MenuItem onClick={() => scrollToSection('favourites')}>
                     Favourite Runs
@@ -214,9 +214,6 @@ function Header({ mode, toggleColorMode }) {
   );
 }
 
-Header.propTypes = {
-  mode: PropTypes.oneOf(['dark', 'light']).isRequired,
-  toggleColorMode: PropTypes.func.isRequired,
-};
+
 
 export default Header;
