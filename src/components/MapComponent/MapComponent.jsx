@@ -32,7 +32,7 @@ const MapComponent = () => {
             console.log(err);
         });
     },
-    []);
+    [baseUrl]);
 
 
 
