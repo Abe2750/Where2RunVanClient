@@ -5,6 +5,7 @@ import SignInSide from  "./components/SignInSide/SignInSide"
 import SignUp from "./components/SignUpPage/SignUpPage"
 import Hero from './components/Hero/Hero';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -16,9 +17,9 @@ function App() {
      <Routes>
         <Route path="/signin" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUp/>} />
-     </Routes>
-      
+      </Routes>
       </BrowserRouter>
+      <Footer/>
     </div>
   );
 }
