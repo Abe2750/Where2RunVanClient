@@ -7,21 +7,24 @@ import Hero from './components/Hero/Hero';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import RunRoutes from './components/RunRoutes/RunRoutes';
+import MapComponent from './components/MapComponent/MapComponent';
 
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-     <Hero/>
-     <BrowserRouter>
-     <RunRoutes/>
-     <Routes>
+     {/* <Header/>
+     <Hero/> */}
+     {/* <RunRoutes/> */}
+     <MapComponent/>
+     {/* <BrowserRouter> */}
+     
+     {/* <Routes>
         <Route path="/signin" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUp/>} />
       </Routes>
       </BrowserRouter>
-      <Footer/>
+      <Footer/> */}
     </div>
   );
 }
