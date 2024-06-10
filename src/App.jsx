@@ -15,7 +15,7 @@ function App() {
     <div className="App">
      {/* <Header/>
      <Hero/> */}
-     {/* <RunRoutes/> */}
+     <RunRoutes/>
      <MapComponent/>
      {/* <BrowserRouter> */}
      
