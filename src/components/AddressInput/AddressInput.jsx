@@ -56,7 +56,7 @@ function AddressInput({ onAddressChange }) {
                         }}
                     />
                 </Autocomplete>
-            </LoadScript>) : <div>Loading...</div>
+            </LoadScript>) : <div>Loading 123...</div>
     );
 }
 
