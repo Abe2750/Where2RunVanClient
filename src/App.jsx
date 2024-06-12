@@ -8,23 +8,25 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import RunRoutes from './components/RunRoutes/RunRoutes';
 import MapComponent from './components/MapComponent/MapComponent';
+import AddressInput from './components/AddressInput/AddressInput';
 
 
 function App() {
   return (
     <div className="App">
-     {/* <Header/>
-     <Hero/> */}
+     <Header/>
+     <Hero/>
+     {/* <AddressInput/> */}
      <RunRoutes/>
-     <MapComponent/>
-     {/* <BrowserRouter> */}
+     {/* <MapComponent/> */}
+     <BrowserRouter>
      
-     {/* <Routes>
+     <Routes>
         <Route path="/signin" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUp/>} />
       </Routes>
       </BrowserRouter>
-      <Footer/> */}
+      <Footer/>
     </div>
   );
 }
