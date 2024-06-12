@@ -7,7 +7,7 @@ import Hero from './components/Hero/Hero';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import RunRoutes from './components/RunRoutes/RunRoutes';
-import MapComponent from './components/MapComponent/MapComponent';
+//import MapComponent from './components/MapComponent/MapComponent';
 import AddressInput from './components/AddressInput/AddressInput';
 
 
@@ -15,13 +15,15 @@ function App() {
   return (
     <div className="App">
      <Header/>
-     <Hero/>
      {/* <AddressInput/> */}
-     <RunRoutes/>
+     {/* <AddressInput/> */}
+     {/* <RunRoutes/> */}
      {/* <MapComponent/> */}
      <BrowserRouter>
      
      <Routes>
+        <Route path="/" element={<Hero/>} />
+        <Route path="/runroutes" element={<RunRoutes/>} />
         <Route path="/signin" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUp/>} />
       </Routes>

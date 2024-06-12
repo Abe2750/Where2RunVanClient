@@ -8,11 +8,16 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import AddressInput from '../AddressInput/AddressInput';
 import MapComponent from '../MapComponent/MapComponent';
+import runningImage from "../../assets/Images/RunSign.jpg";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Hero() {
     const [location, setLocation] = useState({ lat: null, lng: null });
     const [apiKey, setApiKey] = useState('');
     const [stravaAPIKey, setStravaAPIKey] = useState('');
+    const heroImage = runningImage;   
+    const navigate = useNavigate();
 
     useEffect(() => {
         const PORT = process.env.PORT || 8080;
@@ -50,6 +55,10 @@ export default function Hero() {
         } catch (error) {
             console.error('Failed to fetch popular segments:', error);
         }
+        // go to "/runroutes"
+        console.log(lat, lng)
+        navigate("/runroutes")
+
     };
 
     async function handleAddressChange(address) {
@@ -114,7 +123,8 @@ export default function Hero() {
                     pt: { xs: 14, sm: 20 },
                     pb: { xs: 8, sm: 12 },
                 }}
-            >
+            >  
+            {/* <img src={heroImage}  style={{ width: '100%', height: '400px' }} /> */}
                 <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
                     <Typography
                         variant="h1"
@@ -136,7 +146,7 @@ export default function Hero() {
                                     theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
                             }}
                         >
-                            Where2RunVan
+                            Where2Run
                         </Typography>
                     </Typography>
                     <Typography
@@ -144,7 +154,7 @@ export default function Hero() {
                         color="text.secondary"
                         sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
                     >
-                        Tired of running the same route? Where2RunVan helps you discover new running routes in Vancouver while exploring the city.
+                        Tired of running the same route? Where2RunVan helps you discover new running routes in new place  while exploring the city.
                     </Typography>
 
                     <AddressInput onAddressChange={handleAddressChange} />
