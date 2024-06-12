@@ -208,28 +208,6 @@ const routesData =
         "starred": false,
         "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/PUX4HWQ3UB6MSMFXERJ5MQPFTHX7LU3NEKRGVMDWVB6LOKH57UNPGSE6YPV6ZNO6BNTRQCV6KYXYHVDLCAOJHFY=",
         "local_legend_enabled": true
-    },
-    {
-        "id": 26301436,
-        "resource_state": 2,
-        "name": "EVRC Segment Series #1 - The Movember",
-        "climb_category": 0,
-        "climb_category_desc": "NC",
-        "avg_grade": 0,
-        "start_latlng": [
-            49.29077,
-            -123.055875
-        ],
-        "end_latlng": [
-            49.290773,
-            -123.055929
-        ],
-        "elev_difference": 16.7,
-        "distance": 1855.5,
-        "points": "ibzkHfjanVYkBAY[oBGeAIc@Gw@WqAc@cEOs@Gm@YoAG}@Ic@I_Aa@mCQuAA[JkA?g@Fo@DOFiA\\qC`@iCHWFu@VsAToCp@eEj@kBLWBHCR@h@H`CA`JBjAAX@jAExA@xACn@DfC?pBCh@@tDBrAGlABdA?p@Bn@EvF@XAnFBb@GtC",
-        "starred": false,
-        "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/MTJXG267UQYPTHC2Y26TIWONVSZOQ25V5W7K67CFNG3EEN3BHAVJWUVAOV4LVIL6YL4B5KOM2QG7T3DKB54KE5DD",
-        "local_legend_enabled": true
     }
 ];
 

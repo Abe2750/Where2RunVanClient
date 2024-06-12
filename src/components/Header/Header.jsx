@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import RunningIcon from '../../assets/Icons/running.svg';
+import Link from '@mui/material/Link';
 
 
 
@@ -88,14 +89,19 @@ function Header() {
                 ml: '-18px',
                 px: 0,
               }}
-            >
-              <img
+            > 
+            <Link href="/">
+            <img
                 src={
                     RunningIcon
                 }
                 style={logoStyle}
                 alt="logo of sitemark"
+               
+                
               />
+            </Link>
+             
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 
                 <MenuItem
@@ -111,7 +117,7 @@ function Header() {
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                   Contact Us
+                    Go to Strava
                   </Typography>
                 </MenuItem>
               </Box>
