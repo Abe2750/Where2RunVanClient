@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { GoogleMap, Polyline } from '@react-google-maps/api';
+import { GoogleMap, Polyline, Marker } from '@react-google-maps/api';
 import { styled } from '@mui/system';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 
-const libraries = ["places"]; // Libraries required for the Autocomplete component
+const libraries = ["places", "marker"];
 
 const MapComponent = () => {
     const MapContainer = styled('div')({
@@ -17,7 +17,6 @@ const MapComponent = () => {
 
     const [apiKey, setApiKey] = useState('');
     const [isMapLoaded, setIsMapLoaded] = useState(false);
-    const [stravaAPIKey, setStravaAPIKey] = useState('');
     const [polylinePath, setPolylinePath] = useState([]);
     const mapRef = useRef(null);
 
@@ -75,49 +74,50 @@ const MapComponent = () => {
             try {
                 const res = await axios.get(`${baseUrl}/mapData`);
                 setApiKey(res.data.apiKey);
-                setStravaAPIKey(res.data.stravaApiKey);
-                setPolylinePath(decodePolyline(data.points));
-                console.log(res.data);
 
-                const loader = new Loader({
-                    apiKey: res.data.apiKey,
-                    version: "weekly",
-                    libraries,
-                });
-
-                loader.load().then(() => {
-                    setIsMapLoaded(true);
-                }).catch((err) => {
-                    console.error('Error loading Google Maps API:', err);
-                });
+                const path = decodePolyline(data.points);
+                console.log('Decoded polyline path:', path);
+                setPolylinePath(path);
             } catch (err) {
                 console.log(err);
-                // Handle error fetching map data
             }
         };
         fetchData();
-    }, [baseUrl]);
+    }, [baseUrl,data.points]);
+
+    useEffect(() => {
+        console.log('Updated polylinePath:', polylinePath);
+        if (isMapLoaded && mapRef.current) {
+            const bounds = new window.google.maps.LatLngBounds();
+            polylinePath.forEach((point) => {
+                bounds.extend(point);
+            });
+            mapRef.current.fitBounds(bounds);
+        }
+    }, [isMapLoaded, polylinePath]);
+
+    useEffect(() => {
+        if (apiKey) {
+            const loader = new Loader({
+                apiKey: apiKey,
+                version: "weekly",
+                libraries,
+            });
+
+            loader.load().then(() => {
+                setIsMapLoaded(true);
+            }).catch((err) => {
+                console.error('Error loading Google Maps API:', err);
+            });
+        }
+    }, [apiKey]);
 
     const mapStyles = {
         height: '100%',
         width: '100%',
     };
 
-    const [defaultCenter, setDefaultCenter] = useState({
-        lat: 49.2827,
-        lng: -123.1207
-    });
-
-    useEffect(() => {
-        if (isMapLoaded && mapRef.current) {
-            const { AdvancedMarkerElement } =  require('@react-google-maps/api');
-
-            new AdvancedMarkerElement({
-                position: defaultCenter,
-                map: mapRef.current,
-            });
-        }
-    }, [isMapLoaded, defaultCenter]);
+    const defaultCenter = polylinePath.length > 0 ? polylinePath[0] : { lat: 37.8331119, lng: -122.4834356 };
 
     return (
         <div>
@@ -125,9 +125,10 @@ const MapComponent = () => {
                 <MapContainer id="map">
                     <GoogleMap
                         center={defaultCenter}
-                        zoom={8}
+                        zoom={12}
                         options={{
                             disableDefaultUI: false,
+                            mapId: "59da33484abe8f95", 
                         }}
                         mapContainerStyle={mapStyles}
                         onLoad={map => (mapRef.current = map)}
@@ -135,12 +136,17 @@ const MapComponent = () => {
                         <Polyline
                             path={polylinePath}
                             options={{
-                                strokeColor: "#ff2527",
-                                strokeOpacity: 0.75,
+                                strokeColor: "#ff0000",
+                                strokeOpacity: 1.0,
                                 strokeWeight: 2,
+                                geodesic: true,
                             }}
                         />
+                        {polylinePath.length > 0 && (
+                            <Marker position={polylinePath[0]} />
+                        )}
                     </GoogleMap>
+                    {polylinePath.length > 0 && (<div>Distance: {data.distance} meters</div>)}
                 </MapContainer>
             ) : (
                 <div>Loading map ...</div>
