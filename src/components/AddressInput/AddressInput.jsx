@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'; // Importing useState from re
 import { LoadScript,Autocomplete } from '@react-google-maps/api';
 import axios from 'axios'; // Importing axios
 import TextField from '@mui/material/TextField';
+import process from 'process';
 
 const libraries = ["places"]; // Libraries required for the Autocomplete component
 
@@ -21,7 +22,7 @@ function AddressInput(){
     useEffect(() => { 
         axios.get(`${baseUrl}/mapData`)
         .then((res) => {
-            setApiKey(res.data.apiKey);
+            setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
             console.log(res.data);
         })
         .catch((err) => {

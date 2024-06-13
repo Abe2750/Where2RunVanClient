@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { GoogleMap, LoadScript, Polyline } from '@react-google-maps/api';
+import { useLocation } from 'react-router-dom';
 
 // Sample data
 const routesData = 
@@ -14,7 +15,7 @@ const routesData =
     {
         "id": 21774536,
         "resource_state": 2,
-        "name": "Grouse Grind Proper",
+        "name": "Grouse Grinnd Proper",
         "climb_category": 4,
         "climb_category_desc": "1",
         "avg_grade": 26,
@@ -249,6 +250,14 @@ export default function Routes() {
   const [starredRoutes, setStarredRoutes] = useState(routesData.map(() => false));
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
+  const location = useLocation();
+  console.log("segments before", location.state?.segments.segments);
+  // console.log(typeof(location.state?.segments));
+
+  // const segments = location.state?.segments || routesData;
+  const routesList = location.state?.segments.segments.slice(0,9) || routesData;
+  console.log("segments here",routesList);
+
   const handleStarClick = (index) => {
     const newStarredRoutes = [...starredRoutes];
     newStarredRoutes[index] = !newStarredRoutes[index];
@@ -282,75 +291,81 @@ export default function Routes() {
           Explore our featured routes. Discover the elevation, distance, and path of each route. Join us for an adventure!
         </Typography>
       </Box>
-      
+
       {/* Route cards */}
       <Grid container spacing={2}>
-        {routesData.map((route, index) => (
-          <Grid key={route.id} item xs={12} sm={6} md={4} sx={{ display: 'flex' }}>
-            <Card
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                flexGrow: 1,
-                p: 1,
-              }}
-            >
-              <CardContent>
-                {/* Route content */}
-                <Typography variant="body2" color="text.secondary">
-                  {`Name: ${route.name}`}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {`Climb Category: ${route.climb_category_desc}`}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {`Average Grade: ${route.avg_grade}%`}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {`Elevation Difference: ${route.elev_difference}m`}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {`Distance: ${route.distance}m`}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {`Starred: ${starredRoutes[index] ? "Yes" : "No"}`}
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  color={starredRoutes[index] ? "primary" : "secondary"}
-                  onClick={() => handleStarClick(index)}
-                  sx={{ mt: 2 }}
-                >
-                  {starredRoutes[index] ? "Unstar" : "Star"}
-                </Button>
-              </CardContent>
-              {/* Route map */}
-              <Box sx={{ height: '200px', width: '100%' }}>
-                <LoadScript googleMapsApiKey={apiKey}>
-                  <GoogleMap
-                    mapContainerStyle={{ height: '100%', width: '100%' }}
-                    center={{
-                      lat: route.start_latlng[0],
-                      lng: route.start_latlng[1],
-                    }}
-                    zoom={15}
+        {routesList && routesList.length > 0 ? (
+          routesList.map((route, index) => (
+            <Grid key={index} item xs={12} sm={6} md={4} sx={{ display: 'flex' }}>
+              <Card
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  flexGrow: 1,
+                  p: 1,
+                }}
+              >
+                <CardContent>
+                  {/* Route content */}
+                  <Typography variant="body2" color="text.secondary">
+                    {`Name: ${route.name}`}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {`Climb Category: ${route.climb_category_desc}`}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {`Average Grade: ${route.avg_grade}%`}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {`Elevation Difference: ${route.elev_difference}m`}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {`Distance: ${route.distance}m`}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {`Starred: ${starredRoutes[index] ? "Yes" : "No"}`}
+                  </Typography>
+                  <Button 
+                    variant="contained" 
+                    color={starredRoutes[index] ? "primary" : "secondary"}
+                    onClick={() => handleStarClick(index)}
+                    sx={{ mt: 2 }}
                   >
-                    <Polyline
-                      path={decodePolyline(route.points)}
-                      options={{
-                        strokeColor: "#ff0000",
-                        strokeOpacity: 1.0,
-                        strokeWeight: 2,
-                        geodesic: true,
+                    {starredRoutes[index] ? "Unstar" : "Star"}
+                  </Button>
+                </CardContent>
+                {/* Route map */}
+                <Box sx={{ height: '200px', width: '100%' }}>
+                  <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+                    <GoogleMap
+                      mapContainerStyle={{ height: '100%', width: '100%' }}
+                      center={{
+                        lat: route.start_latlng[0],
+                        lng: route.start_latlng[1],
                       }}
-                    />
-                  </GoogleMap>
-                </LoadScript>
-              </Box>
-            </Card>
-          </Grid>
-        ))}
+                      zoom={15}
+                    >
+                      <Polyline
+                        path={decodePolyline(route.points)}
+                        options={{
+                          strokeColor: "#ff0000",
+                          strokeOpacity: 1.0,
+                          strokeWeight: 2,
+                          geodesic: true,
+                        }}
+                      />
+                    </GoogleMap>
+                  </LoadScript>
+                </Box>
+              </Card>
+            </Grid>
+          ))
+        ) : (
+          <Typography variant="body1" color="text.secondary">
+            No routes available.
+          </Typography>
+        )}
       </Grid>
     </Container>
   );

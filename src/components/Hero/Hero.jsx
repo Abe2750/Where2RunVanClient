@@ -48,16 +48,21 @@ export default function Hero() {
     const handleClick = async () => {
         const lat = location.lat ? location.lat : 49.2827;
         const lng = location.lng ? location.lng : -123.1207;
+        
 
         try {
             const segments = await getPopularSegments(lat, lng);
+            
             console.log(segments); // Do something with the segments data
+            navigate('/runroutes', { state: { segments: segments } });
         } catch (error) {
             console.error('Failed to fetch popular segments:', error);
+            navigate('/runroutes', { state: { segments: [] } });
         }
         // go to "/runroutes"
         console.log(lat, lng)
-        navigate("/runroutes")
+    
+        
 
     };
 
