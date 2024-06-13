@@ -1,6 +1,5 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-
+// src/components/Header.js
+import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,13 +10,9 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import RunningIcon from '../../assets/Icons/running.svg';
 import Link from '@mui/material/Link';
-
-
-
-
-
+import { AuthContext } from '../../contexts/AuthContext';
+import RunningIcon from '../../assets/Icons/running.svg';
 
 const logoStyle = {
   width: '70px',
@@ -28,9 +23,14 @@ const logoStyle = {
 
 function Header() {
   const [open, setOpen] = React.useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+  };
+
+  const handleSignOut = () => {
+    setIsLoggedIn(false);
   };
 
   const scrollToSection = (sectionId) => {
@@ -89,26 +89,16 @@ function Header() {
                 ml: '-18px',
                 px: 0,
               }}
-            > 
-            <Link href="/">
-            <img
-                src={
-                    RunningIcon
-                }
-                style={logoStyle}
-                alt="logo of sitemark"
-               
-                
-              />
-            </Link>
-             
+            >
+              <Link href="/">
+                <img src={RunningIcon} style={logoStyle} alt="logo of sitemark" />
+              </Link>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                
                 <MenuItem
                   onClick={() => scrollToSection('favourites')}
                   sx={{ py: '6px', px: '12px' }}
                 >
-                  <Typography variant="body2" color="text.primary">
+                  <Typography variant="body1" color="text.primary">
                     Favourite Runs
                   </Typography>
                 </MenuItem>
@@ -116,9 +106,11 @@ function Header() {
                   onClick={() => scrollToSection('contact-us')}
                   sx={{ py: '6px', px: '12px' }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    Go to Strava
-                  </Typography>
+                  <Link href="https://www.strava.com" target="_blank" rel="noopener noreferrer">
+                    <Typography variant="body1" color="text.primary">
+                      Go to Strava
+                    </Typography>
+                  </Link>
                 </MenuItem>
               </Box>
             </Box>
@@ -129,25 +121,37 @@ function Header() {
                 alignItems: 'center',
               }}
             >
-             
-              <Button
-                color="primary"
-                variant="text"
-                size="small"
-                component="a"
-                href="/signin"
-              >
-                Sign in
-              </Button>
-              <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                component="a"
-                href="/signup"
-              >
-                Sign up
-              </Button>
+              {isLoggedIn ? (
+                <Button
+                  color="primary"
+                  variant="text"
+                  size="small"
+                  onClick={handleSignOut}
+                >
+                  Sign out
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    color="primary"
+                    variant="text"
+                    size="small"
+                    component="a"
+                    href="/signin"
+                  >
+                    Sign in
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    component="a"
+                    href="/signup"
+                  >
+                    Sign up
+                  </Button>
+                </>
+              )}
             </Box>
             <Box sx={{ display: { sm: '', md: 'none' } }}>
               <Button
@@ -175,9 +179,7 @@ function Header() {
                       alignItems: 'end',
                       flexGrow: 1,
                     }}
-                  >
-                  
-                  </Box>
+                  ></Box>
                   <MenuItem onClick={() => scrollToSection('favourites')}>
                     Favourite Runs
                   </MenuItem>
@@ -186,30 +188,43 @@ function Header() {
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
                   <Divider />
-                  <MenuItem>
-                    
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      component="a"
-                      href='/signup'
-                      sx={{ width: '100%' }}
-                    >
-                      Sign up
-                    </Button>
-                    
-                  </MenuItem>
-                  <MenuItem>
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      component="a"
-                      href="/signin"
-                      sx={{ width: '100%' }}
-                    >
-                      Sign in
-                    </Button>
-                  </MenuItem>
+                  {isLoggedIn ? (
+                    <MenuItem>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        onClick={handleSignOut}
+                        sx={{ width: '100%' }}
+                      >
+                        Sign out
+                      </Button>
+                    </MenuItem>
+                  ) : (
+                    <>
+                      <MenuItem>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          component="a"
+                          href="/signup"
+                          sx={{ width: '100%' }}
+                        >
+                          Sign up
+                        </Button>
+                      </MenuItem>
+                      <MenuItem>
+                        <Button
+                          color="primary"
+                          variant="outlined"
+                          component="a"
+                          href="/signin"
+                          sx={{ width: '100%' }}
+                        >
+                          Sign in
+                        </Button>
+                      </MenuItem>
+                    </>
+                  )}
                 </Box>
               </Drawer>
             </Box>
@@ -219,7 +234,5 @@ function Header() {
     </div>
   );
 }
-
-
 
 export default Header;

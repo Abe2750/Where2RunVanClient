@@ -7,16 +7,20 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import AddressInput from '../AddressInput/AddressInput';
-import MapComponent from '../MapComponent/MapComponent';
 import runningImage from "../../assets/Images/RunSign.jpg";
 import { useNavigate } from 'react-router-dom';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 
 export default function Hero() {
     const [location, setLocation] = useState({ lat: null, lng: null });
     const [apiKey, setApiKey] = useState('');
     const [stravaAPIKey, setStravaAPIKey] = useState('');
-    const heroImage = runningImage;   
+    const [radius, setRadius] = useState(10);
+    const heroImage = runningImage;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -48,22 +52,15 @@ export default function Hero() {
     const handleClick = async () => {
         const lat = location.lat ? location.lat : 49.2827;
         const lng = location.lng ? location.lng : -123.1207;
-        
 
         try {
             const segments = await getPopularSegments(lat, lng);
-            
             console.log(segments); // Do something with the segments data
             navigate('/runroutes', { state: { segments: segments } });
         } catch (error) {
             console.error('Failed to fetch popular segments:', error);
             navigate('/runroutes', { state: { segments: [] } });
         }
-        // go to "/runroutes"
-        console.log(lat, lng)
-    
-        
-
     };
 
     async function handleAddressChange(address) {
@@ -107,6 +104,11 @@ export default function Hero() {
         }
     }
 
+    const handleRadiusChange = (event) => {
+        setRadius(event.target.value);
+    };
+
+
     return (
         <Box
             id="hero"
@@ -128,8 +130,7 @@ export default function Hero() {
                     pt: { xs: 14, sm: 20 },
                     pb: { xs: 8, sm: 12 },
                 }}
-            >  
-            {/* <img src={heroImage}  style={{ width: '100%', height: '400px' }} /> */}
+            >
                 <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
                     <Typography
                         variant="h1"
@@ -159,10 +160,26 @@ export default function Hero() {
                         color="text.secondary"
                         sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
                     >
-                        Tired of running the same route? Where2RunVan helps you discover new running routes in new place  while exploring the city.
+                        Tired of running the same route? Where2RunVan helps you discover new running routes in new place while exploring the city.
                     </Typography>
 
                     <AddressInput onAddressChange={handleAddressChange} />
+                    <FormControl  variant="outlined" sx={{ mt: 2 ,width : "25%" , mx : "auto"}}>
+                        <InputLabel id="radius-label" sx={{ mb : 6, width: '8rem', ml: '8px' }}>Radius (km)</InputLabel>
+                        <Select
+                            labelId="radius-label"
+                            id="radius"
+                            value={radius}
+                            onChange={handleRadiusChange}
+                            label="Radius (km)"
+                            sx = {{height : "30px"}}
+                        >
+                            <MenuItem value={5}>5 km</MenuItem>
+                            <MenuItem value={10}>10 km</MenuItem>
+                            <MenuItem value={15}>15 km</MenuItem>
+                            <MenuItem value={30}>30 km</MenuItem>
+                        </Select>
+                    </FormControl>
                     <Box>
                         <Button
                             variant="contained"
@@ -178,3 +195,4 @@ export default function Hero() {
         </Box>
     );
 }
+ 
