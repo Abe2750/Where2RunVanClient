@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import RunRoutes from './components/RunRoutes/RunRoutes';
 //import MapComponent from './components/MapComponent/MapComponent';
 import AddressInput from './components/AddressInput/AddressInput';
+import FaveRoutes from './components/FaveRoutes/FaveRoutes';
 
 import { AuthProvider } from './contexts/AuthContext';
 
@@ -27,6 +28,7 @@ function App() {
      <Routes>
         <Route path="/" element={<Hero/>} />
         <Route path="/runroutes" element={<RunRoutes/>} />
+        <Route path="/faveroutes" element={<FaveRoutes/>} />
         <Route path="/signin" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUp/>} />
       </Routes>

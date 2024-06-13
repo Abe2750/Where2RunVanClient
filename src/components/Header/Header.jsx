@@ -97,16 +97,18 @@ function Header() {
                 <MenuItem
                   onClick={() => scrollToSection('favourites')}
                   sx={{ py: '6px', px: '12px' }}
-                >
+                > 
+                <Link href="/faveroutes" underline="none">
                   <Typography variant="body1" color="text.primary">
                     Favourite Runs
                   </Typography>
+                </Link>
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection('contact-us')}
                   sx={{ py: '6px', px: '12px' }}
                 >
-                  <Link href="https://www.strava.com" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://www.strava.com" target="_blank" rel="noopener noreferrer" underline="none">
                     <Typography variant="body1" color="text.primary">
                       Go to Strava
                     </Typography>

@@ -172,7 +172,7 @@ export default function Hero() {
                             value={radius}
                             onChange={handleRadiusChange}
                             label="Radius (km)"
-                            sx = {{height : "30px"}}
+                            sx = {{height : "30px", mt : "10px"}}
                         >
                             <MenuItem value={5}>5 km</MenuItem>
                             <MenuItem value={10}>10 km</MenuItem>
