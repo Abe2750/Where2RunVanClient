@@ -10,10 +10,13 @@ import RunRoutes from './components/RunRoutes/RunRoutes';
 //import MapComponent from './components/MapComponent/MapComponent';
 import AddressInput from './components/AddressInput/AddressInput';
 
+import { AuthProvider } from './contexts/AuthContext';
+
 
 function App() {
   return (
     <div className="App">
+    <AuthProvider>
      <Header/>
      {/* <AddressInput/> */}
      {/* <AddressInput/> */}
@@ -29,6 +32,7 @@ function App() {
       </Routes>
       </BrowserRouter>
       <Footer/>
+    </AuthProvider>
     </div>
   );
 }
