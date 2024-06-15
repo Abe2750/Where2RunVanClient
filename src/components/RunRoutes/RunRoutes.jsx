@@ -285,7 +285,7 @@ export default function Routes() {
         }}
       >
         <Typography component="h2" variant="h4" color="text.primary">
-          Routes
+          Suggested Routes
         </Typography>
         <Typography variant="body1" color="text.secondary">
           Explore our featured routes. Discover the elevation, distance, and path of each route. Join us for an adventure!
@@ -332,7 +332,7 @@ export default function Routes() {
                     onClick={() => handleStarClick(index)}
                     sx={{ mt: 2 }}
                   >
-                    {starredRoutes[index] ? "Unstar" : "Star"}
+                    {starredRoutes[index] ? "Remove " : "Add to Favourites"}
                   </Button>
                 </CardContent>
                 {/* Route map */}

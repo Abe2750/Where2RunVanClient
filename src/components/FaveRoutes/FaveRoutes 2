@@ -189,7 +189,7 @@ export default function FaveRoutes() {
         }}
       >
         <Typography component="h2" variant="h4" color="text.primary">
-          Your Favourite Routes
+          Routes
         </Typography>
         <Typography variant="body1" color="text.secondary">
           Explore our featured routes. Discover the elevation, distance, and path of each route. Join us for an adventure!
@@ -237,7 +237,7 @@ export default function FaveRoutes() {
                     onClick={() => toggleStar(index)}
                     sx={{ mt: 2 }}
                   >
-                    {starredRoutes[index] ? "Remove" : "Add"}
+                    {starredRoutes[index] ? "Unstar" : "Star"}
                   </Button>
                 </CardContent>
                 {/* Route map */}
